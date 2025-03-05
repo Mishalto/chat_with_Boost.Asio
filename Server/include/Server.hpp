@@ -14,7 +14,6 @@ private:
 
 public:
     Server();
-
     void start_server();
     void do_accept();
 };
