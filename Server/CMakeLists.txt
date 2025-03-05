@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(BOOST_ROOT "D:/Libs/boost_1_87_0")
 
-add_executable(Server src/main.cpp)
+add_executable(Server src/main.cpp src/core/Server.cpp src/core/ClientManager.cpp)
 
 add_definitions(-D_WIN32_WINNT=0x0A00) # win 10
 

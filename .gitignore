@@ -32,3 +32,4 @@
 *.app
 /Client/build
 /Server/build
+/Server/.vscode
