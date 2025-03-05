@@ -3,8 +3,12 @@
 #include <Server.hpp>
 
 int main() {
-    Server server;
-    server.start_server();
+    try {
+        Server server;
+        server.start_server();
+    } catch (const std::exception& e) {
+        std::cerr << "[Main]" << e.what() << '\n';
+    }
 
     return 0;
 }
