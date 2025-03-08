@@ -1,5 +1,3 @@
 #include <Client.hpp>
 
-Client::Client() {
-    std::cout << "Client\n";
-}
+Client::Client(std::shared_ptr<tcp::socket> socket) : socket_(std::move(socket)) {}
