@@ -3,6 +3,7 @@
 #include <Server.hpp>
 
 int main() {
+    setlocale(LC_ALL, "");
     try {
         Server server;
         server.start_server();
