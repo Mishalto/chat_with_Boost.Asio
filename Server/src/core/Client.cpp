@@ -2,9 +2,10 @@
 
 Client::Client() {}
 
-Client::Client(std::shared_ptr<tcp::socket> socket) : socket_(socket) {
-    std::cout << "[Client]" << socket->remote_endpoint().address().to_string() << " initialized\n";
+Client::Client(std::shared_ptr<tcp::socket>& socket) : socket_(socket) {
+    std::cout << "[Client]" << socket_->remote_endpoint().address().to_string() << " initialized\n";
     std::thread read_thread(&Client::do_read, this);
+    read_thread.detach();
 }
 
 void Client::do_read() {

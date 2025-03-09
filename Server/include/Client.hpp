@@ -17,7 +17,7 @@ private:
 
 public:
     Client();
-    Client(std::shared_ptr<tcp::socket> socket);
+    Client(std::shared_ptr<tcp::socket>& socket);
 
     void do_read();
     bool has_message() const;
