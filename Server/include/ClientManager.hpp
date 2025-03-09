@@ -11,9 +11,10 @@ class ClientManager {
 private:
     std::unordered_map<std::string, Client> clients_;
 
+    void check_message();
 public:
     ClientManager();
 
     void add_client(const std::string& ip_addr, std::shared_ptr<tcp::socket> socket);
-    void check_message();
+    size_t active_client() const;
 };
