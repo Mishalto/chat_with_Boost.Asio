@@ -15,6 +15,7 @@ void Server::start_server() {
 };
 
 void Server::do_accept() {
+    std::cout << "[Server]Active clients -> " << client_manager_.active_client() << '\n';
     std::cout << "[Server]Waiting client...\n";
 
     auto socket = std::make_shared<tcp::socket>(io_context_);
