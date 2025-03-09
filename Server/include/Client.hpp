@@ -4,6 +4,7 @@
 #include <memory>
 #include <thread>
 #include <array>
+#include <chrono>
 #include <boost/asio.hpp>
 
 class Client {
@@ -17,10 +18,13 @@ private:
 
 public:
     Client();
-    Client(std::shared_ptr<tcp::socket>& socket);
+    Client(std::shared_ptr<tcp::socket> socket);
 
     void do_read();
     bool has_message() const;
     const std::string& get_message();
     void reset_flag();
+
+    // Deleted after fix
+    void check_valid();
 };
