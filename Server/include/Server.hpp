@@ -12,7 +12,7 @@ private:
     boost::asio::io_context io_context_;
     tcp::acceptor acceptor_;
     bool is_running_;
-    ClientManager client_manager;
+    ClientManager client_manager_;
 public:
     Server();
     void start_server();

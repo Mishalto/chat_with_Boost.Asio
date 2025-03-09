@@ -24,7 +24,7 @@ void Server::do_accept() {
     if (!err) {
         std::cout << "[Server]Client connected.\n";
         std::string addr = socket->remote_endpoint().address().to_string();
-        client_manager.add_client(addr, std::move(socket));
+        client_manager_.add_client(addr, socket);
     } else {
         std::cerr << "[Server]" << err.message() << '\n';
     }
