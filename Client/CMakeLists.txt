@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(BOOST_ROOT "D:/Libs/boost_1_87_0")
+set(BOOST_ROOT "G:/Code/boost_1_87_0")
 
 add_executable(Client src/main.cpp)
 
