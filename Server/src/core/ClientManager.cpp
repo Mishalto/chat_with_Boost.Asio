@@ -5,7 +5,7 @@ ClientManager::ClientManager() {
 }
 
 void ClientManager::add_client(const std::string& ip_addr, std::shared_ptr<tcp::socket> socket) {
-    clients_[ip_addr] = Client{std::move(socket)};
+    clients_[ip_addr] = Client{socket};
 }
 
 void ClientManager::check_message() {
