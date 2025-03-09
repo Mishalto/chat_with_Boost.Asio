@@ -3,6 +3,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <thread>
+#include <memory>
 #include <boost/asio.hpp>
 #include <Client.hpp>
 
@@ -10,7 +11,7 @@ class ClientManager {
     using tcp = boost::asio::ip::tcp;
 
 private:
-    std::unordered_map<std::string, Client> clients_;
+    std::unordered_map<std::string, std::shared_ptr<Client>> clients_;
 
     void check_message();
 public:

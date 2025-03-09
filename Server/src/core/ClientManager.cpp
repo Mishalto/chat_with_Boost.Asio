@@ -8,9 +8,9 @@ ClientManager::ClientManager() {
 void ClientManager::check_message() {
     for (;;) {
         for (auto& s : clients_) {
-            if (s.second.has_message()) {
-                std::cout << s.second.get_message();
-                s.second.reset_flag();
+            if (s.second->has_message()) {
+                std::cout << s.second->get_message();
+                s.second->reset_flag();
             }
         }
     }
@@ -20,9 +20,10 @@ void ClientManager::add_client(const std::string& ip_addr, std::shared_ptr<tcp::
     auto find_it = clients_.find(ip_addr);
     if (find_it == clients_.end()) {
         std::cout << "[ClientManager]" << ip_addr << " added.\n";
-        clients_[ip_addr] = Client{socket};
+        auto client = std::make_shared<Client>(socket);
+        clients_[ip_addr] = client;
         std::cout << "[ClientManager]Desc -> ";
-        clients_[ip_addr].check_valid();
+        clients_[ip_addr]->check_valid();
     } else {
         std::cout << "[ClientManager]" << ip_addr << " already here.\n";
     }
