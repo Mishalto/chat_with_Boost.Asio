@@ -16,11 +16,13 @@ void ClientManager::check_message() {
     }
 }
 
-void ClientManager::add_client(const std::string& ip_addr, std::shared_ptr<tcp::socket>& socket) {
+void ClientManager::add_client(const std::string& ip_addr, std::shared_ptr<tcp::socket> socket) {
     auto find_it = clients_.find(ip_addr);
     if (find_it == clients_.end()) {
         std::cout << "[ClientManager]" << ip_addr << " added.\n";
         clients_[ip_addr] = Client{socket};
+        std::cout << "[ClientManager]Desc -> ";
+        clients_[ip_addr].check_valid();
     } else {
         std::cout << "[ClientManager]" << ip_addr << " already here.\n";
     }
