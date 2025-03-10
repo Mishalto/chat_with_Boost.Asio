@@ -1,6 +1,11 @@
 #include <Server.hpp>
 
-Server::Server() : acceptor_(io_context_, tcp::endpoint(tcp::v4(), 12345)), is_running_(false) {}
+Server::Server() : acceptor_(io_context_, tcp::endpoint(tcp::v4(), 12345)), is_running_(false), commands_thread(&Server::check_commands, this) {}
+
+Server::~Server() {
+    commands_thread.join();
+    std::cout << "The server has shutdown.\n";
+}
 
 void Server::start_server() {
     try {
@@ -28,5 +33,21 @@ void Server::do_accept() {
         client_manager_.add_client(addr, socket);
     } else {
         std::cerr << "[Server]" << err.message() << '\n';
+    }
+}
+
+void Server::check_commands() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(300));    // Baaaaad!!!!
+    std::cout << "You can use /stop to stop the server\n";
+    while(true) {
+        std::string command;
+        std::cin >> command;
+        if (command == "/stop") {
+            is_running_ = false;
+            std::exit(0);
+            break;
+        } else {
+            std::cout << "Invalid input\n";
+        }
     }
 }
