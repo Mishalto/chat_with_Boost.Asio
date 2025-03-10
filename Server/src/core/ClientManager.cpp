@@ -1,9 +1,11 @@
 #include <ClientManager.hpp>
 
-ClientManager::ClientManager() {
+ClientManager::ClientManager() : check_thread(&ClientManager::check_message, this) {
     check_message_started = true;
-    std::thread check_thread(&ClientManager::check_message, this);
-    check_thread.detach();
+}
+
+ClientManager::~ClientManager() {
+    check_thread.join();
 }
 
 void ClientManager::check_message() {
@@ -13,6 +15,7 @@ void ClientManager::check_message() {
                 if (s.second->has_message()) {
                     std::cout << s.second->get_message() << '\n';
                     std::lock_guard<std::mutex> lock(mtx_clients_);
+                    echo(s.second->get_message(), s.second->get_socket()->remote_endpoint().address().to_string());
                     s.second->reset_flag();
                 } else if (!s.second->is_connected()) {
                     std::string addr_client = s.second->get_addr();
@@ -50,4 +53,15 @@ void ClientManager::add_client(const std::string& ip_addr, std::shared_ptr<tcp::
 size_t ClientManager::active_client() {
     std::lock_guard<std::mutex> lock(mtx_clients_);
     return clients_.size();
+}
+
+void ClientManager::echo(std::string_view msg, std::string_view addr_sender) {
+    if (!clients_.empty()) {
+        for(auto& s : clients_) {
+            if(s.second->get_addr() != addr_sender) {
+                boost::asio::write(*(s.second->get_socket()), boost::asio::buffer(msg));
+                std::cout << "[ClientManager]Echo\n";
+            }
+        }
+    }
 }

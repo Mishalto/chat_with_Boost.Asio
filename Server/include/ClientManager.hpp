@@ -13,13 +13,16 @@ class ClientManager {
 
 private:
     std::unordered_map<std::string, std::shared_ptr<Client>> clients_;
+    std::thread check_thread;
     std::mutex mtx_clients_;
 
     void check_message();
     bool check_message_started;
 public:
     ClientManager();
+    ~ClientManager();
 
     void add_client(const std::string& ip_addr, std::shared_ptr<tcp::socket> socket);
     size_t active_client();
+    void echo(std::string_view msg, std::string_view addr_sender);
 };
