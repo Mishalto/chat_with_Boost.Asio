@@ -13,8 +13,9 @@ private:
     tcp::acceptor acceptor_;
     bool is_running_;
     ClientManager client_manager_;
+
+    void do_accept();
 public:
     Server();
     void start_server();
-    void do_accept();
 };

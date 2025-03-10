@@ -13,10 +13,12 @@ int main() {
     } else {
         std::cerr << "Error!\n";
     }
-    std::cout << "Mess: ";
-    std::string mess;
-    std::cin >> mess;
-    boost::asio::write(socket, boost::asio::buffer(mess));
+    for (;;) {
+        std::cout << "Mess: ";
+        std::string mess;
+        std::cin >> mess;
+        boost::asio::write(socket, boost::asio::buffer(mess));
+    }
 
     return 0;
 }

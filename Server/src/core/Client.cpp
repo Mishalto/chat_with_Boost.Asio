@@ -2,28 +2,32 @@
 
 Client::Client() {}
 
-Client::Client(std::shared_ptr<tcp::socket> socket) : socket_(socket) {
-    std::cout << "[Client]" << socket_->remote_endpoint().address().to_string() << " initialized\n";
-    std::thread read_thread(&Client::do_read, this);
-    read_thread.detach();
-    std::cout << "[Client]Desc -> " << socket_->native_handle() << '\n';
+Client::~Client() {
+    read_thread.join();
+}
+
+Client::Client(std::shared_ptr<tcp::socket> socket) : socket_(socket), read_thread(&Client::do_read, this) {
+    client_addr_ = socket_->remote_endpoint().address().to_string();
+    std::cout << "[Client]" << client_addr_ << " initialized\n";
+    is_connected_ = true;
 }
 
 void Client::do_read() {
-    bool is_connected = true;
-    std::cout << "[ClientManager]Listen started.\n";
-    while (is_connected)
+    while (is_connected_)
     {
-        std::cout << "[Socket_opened]" << socket_->is_open() << '\n';
-        std::cout << "[Client]Desc -> " << socket_->native_handle() << '\n';
         boost::system::error_code err;
         size_t length = socket_->read_some(boost::asio::buffer(data_), err);
         if (!err) {
             message_ = std::string(data_.data(), length);
             has_message_ = true;
         } else {
-            std::cerr << "[Client]" << err.message() << '\n';
-            std::this_thread::sleep_for(std::chrono::seconds(3));
+            if(err == boost::asio::error::eof) {
+                std::cout << "[Client]" << socket_->remote_endpoint().address().to_string() << " disconected.\n";
+                is_connected_ = false;
+            } else {
+                std::cerr << "[Client][" << socket_->remote_endpoint().address().to_string() << "]" << err.message() << '\n';
+                is_connected_ = false;
+            }
         }
     }
 }
@@ -40,6 +44,10 @@ void Client::reset_flag() {
     has_message_ = false;
 }
 
-void Client::check_valid() {
-    std::cout << socket_->native_handle() << '\n';
+bool Client::is_connected() {
+    return is_connected_;
+}
+
+const std::string& Client::get_addr() {
+    return client_addr_;
 }
