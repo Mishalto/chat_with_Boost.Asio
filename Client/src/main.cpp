@@ -1,8 +1,27 @@
 #include <iostream>
+#include <array>
 #include <boost/asio.hpp>
 
+using boost::asio::ip::tcp;
+
+void receive_message(tcp::socket& socket) {
+    for (;;) {
+        std::array<char, 1024> data;
+        size_t length = socket.read_some(boost::asio::buffer(data));
+        std::cout << std::string(data.data(), length);
+    }
+}
+
+void send_message(tcp::socket& socket) {
+    for (;;) {
+        std::string mess;
+        std::cin >> mess;
+        boost::asio::write(socket, boost::asio::buffer(mess));
+    }
+}
+
 int main() {
-    using boost::asio::ip::tcp;
+
     boost::asio::io_context io_context;
     tcp::socket socket(io_context);
     tcp::endpoint ep(boost::asio::ip::make_address_v4("92.101.12.97"), 12345);
@@ -13,12 +32,14 @@ int main() {
     } else {
         std::cerr << "Error!\n";
     }
+
+    std::thread send_thread(&send_message, std::ref(socket));
+    std::thread receive_thread(&receive_message, std::ref(socket));
     for (;;) {
-        std::cout << "Mess: ";
-        std::string mess;
-        std::cin >> mess;
-        boost::asio::write(socket, boost::asio::buffer(mess));
+
     }
+    send_thread.join();
+    receive_thread.join();
 
     return 0;
 }
