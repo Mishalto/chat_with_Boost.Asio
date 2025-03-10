@@ -31,4 +31,5 @@ public:
     void reset_flag();
     bool is_connected();
     const std::string& get_addr();
+    std::shared_ptr<boost::asio::ip::tcp::socket> get_socket();
 };

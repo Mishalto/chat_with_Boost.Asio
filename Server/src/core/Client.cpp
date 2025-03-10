@@ -51,3 +51,7 @@ bool Client::is_connected() {
 const std::string& Client::get_addr() {
     return client_addr_;
 }
+
+std::shared_ptr<boost::asio::ip::tcp::socket> Client::get_socket() {
+    return socket_;
+}
