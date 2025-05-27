@@ -24,7 +24,7 @@ int main() {
 
     boost::asio::io_context io_context;
     tcp::socket socket(io_context);
-    tcp::endpoint ep(boost::asio::ip::make_address_v4("92.101.12.97"), 12345);
+    tcp::endpoint ep(boost::asio::ip::make_address_v4("127.0.0.1"), 12345);
     boost::system::error_code err;
     socket.connect(ep, err);
     if (!err) {
