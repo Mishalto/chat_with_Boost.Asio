@@ -15,10 +15,8 @@ private:
     tcp::acceptor acceptor_;
     bool is_running_;
     ClientManager client_manager_;
-    std::thread commands_thread;
 
     void do_accept();
-    void check_commands();
 public:
     Server();
     ~Server();

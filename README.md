@@ -1,13 +1,30 @@
-# Chat (Boost Asio)
-This is a multithreaded asynchronous chat where multiple clients (I tested with up to 4 clients) can simultaneously send requests to the server and receive responses from other clients.  
-The server broadcasts received data to all clients.  
+# 🚀 Multithreaded Asynchronous Chat (Boost.Asio)
 
-## Design
-Boost Asio is used with TCP/IP protocols.  
-Each client is unique, and only one client can connect from a single IP address.  
-All clients are stored in an unordered map with access via their IP addresses.  
+A high-performance TCP/IP chat server using modern C++20 and Boost.Asio. Supports multiple concurrent clients with real-time message broadcasting.
+
+## ✨ Features
+
+- ✔ **Real-time messaging** — Clients receive messages instantly
+- ✔ **Multithreaded server** — Handles 4+ clients simultaneously
+- ✔ **IP-based uniqueness** — Only one client per IP is allowed
+- ✔ **Broadcast system** — All clients receive all messages
+
+### 🔧 Prerequisites
+
+- [CMake 3.15+](https://cmake.org/)
+- [Git](https://git-scm.com/)
+- C++20-compatible compiler:
+  - GCC 10+
+  - Clang 12+
+  - MSVC 19.30+
 
 ## Build
-1. Make sure you have CMake, Git, and the release version of CMake installed.  
-2. Open the project folder.  
-3. CMake will automatically pull all required dependencies, and the project will be ready (this process may take a very long time).  
+
+1. **Download Boost 1.87+ and place it into the project root and rename the folder from Boost_x_xx to boost:**
+    - /boost
+    - /Client
+    - /Server
+2. **Go to `/Server` and build the project:**
+3. **Repeat the same for /Client**
+
+
