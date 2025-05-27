@@ -27,4 +27,8 @@ A high-performance TCP/IP chat server using modern C++20 and Boost.Asio. Support
 2. **Go to `/Server` and build the project:**
 3. **Repeat the same for /Client**
 
+## Tests
+1. Start ./Server
+2. After Server start ./Client
+3. Try to send a message
 
