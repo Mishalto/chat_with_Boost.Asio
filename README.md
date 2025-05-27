@@ -1,6 +1,6 @@
 # 🚀 Multithreaded Asynchronous Chat (Boost.Asio)
 
-A high-performance TCP/IP chat server using modern C++20 and Boost.Asio. Supports multiple concurrent clients with real-time message broadcasting.
+A high-performance TCP/IP chat server with Boost.Asio. Supports multiple concurrent clients with real-time message broadcasting.
 
 ## ✨ Features
 
