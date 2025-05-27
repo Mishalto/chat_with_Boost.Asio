@@ -9,7 +9,7 @@ if(WIN32)
     add_definitions(-D_WIN32_WINNT=0x0A00)
 endif()
 
-set(BOOST_ROOT "../boost")  # или "../boost_1_87_0", если папка так называется
+set(BOOST_ROOT "../boost")
 set(BOOST_INCLUDE_DIR "${BOOST_ROOT}")
 
 add_executable(Server
