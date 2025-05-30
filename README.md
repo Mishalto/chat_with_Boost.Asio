@@ -13,10 +13,6 @@ A high-performance TCP/IP chat server with Boost.Asio. Supports multiple concurr
 
 - [CMake 3.15+](https://cmake.org/)
 - [Git](https://git-scm.com/)
-- C++20-compatible compiler:
-  - GCC 10+
-  - Clang 12+
-  - MSVC 19.30+
 
 ## Build
 
