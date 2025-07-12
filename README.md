@@ -2,12 +2,12 @@
 
 A high-performance TCP/IP chat server with Boost.Asio. Supports multiple concurrent clients with real-time message broadcasting.
 
-## ✨ Features
+## Features
 
-- ✔ **Real-time messaging** — Clients receive messages instantly
-- ✔ **Multithreaded server** — Handles 4+ clients simultaneously
-- ✔ **IP-based uniqueness** — Only one client per IP is allowed
-- ✔ **Broadcast system** — All clients receive all messages
+- ✔ **Real-time messaging**  Clients receive messages instantly
+- ✔ **Multithreaded server**  Handles 4+ clients simultaneously
+- ✔ **IP-based uniqueness**  Only one client per IP is allowed
+- ✔ **Broadcast system**  All clients receive all messages
 
 ### 🔧 Prerequisites
 
